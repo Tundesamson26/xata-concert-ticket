@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { getXataClient } from "../src/xata";
 import { CloudinaryContext, Transformation, Image } from "cloudinary-react";
@@ -10,7 +9,6 @@ import ticket from "../utils/ticket.json";
 
 export default function Home(concert) {
   console.log(concert)
-  // const router = useRouter();
   const [tab, setTab] = useState("ticket");
   const [imageId, setImageId] = useState(null);
   const [formData, setFormData] = useState({
@@ -32,8 +30,8 @@ export default function Home(concert) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        concert_name,
-        artist,
+        concert_name: formData.concert_name,
+        artist: formData.artist,
       }),
     }).then(() => {
         setFormData({
@@ -62,7 +60,7 @@ export default function Home(concert) {
       </Head>
 
       <main className="">
-        <h1 className="text-3xl">Custom concert tickets</h1>
+        <h1 className="text-3xl">Xata Concert tickets</h1>
         
         <header className="flex border-b-2 mt-7 mb-7">
           <Link href="#">
